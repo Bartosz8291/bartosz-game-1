@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BartoszGame</title>
+<HTA:APPLICATION
+     APPLICATIONNAME="BartoszGame"
+     SCROLL="no"
+     SINGLEINSTANCE="yes"
+     WINDOWSTATE="normal">
+<link rel="stylesheet" type="text/css" href="poppins.css">
+<link rel="stylesheet" href="styles/game/style.css">
+</head>
+<body>
+<script language="javascript">
+var points = 0;
+
+function incrementPoints() {
+    points++;
+    updatePointsDisplay();
+    logEvent("Kliknięto przycisk - Punkty: " + points);
+}
+
+function updatePointsDisplay() {
+    document.getElementById("pointsDisplay").innerHTML = "Punkty: " + points;
+}
+
+function logEvent(event) {
+    var fs = new ActiveXObject("Scripting.FileSystemObject");
+    var file = fs.OpenTextFile("logs/logs.log", 8, true);
+    var timestamp = new Date().toLocaleString();
+    file.WriteLine(timestamp + " - " + event);
+    file.Close();
+}
+</script>
+
+<h1 class="welcomeMessage">Witaj w grze BartoszGame!</h1>
+<button onclick="incrementPoints()">Kliknij mnie, aby zdobyć punkt!</button>
+<p id="pointsDisplay" class="welcomeMessage">Punkty: 0</p>
+
+</body>
+</html>
